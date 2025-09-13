@@ -53,4 +53,15 @@ public class MangaDTO {
     public void setDescrption(String descrption) {
         this.descrption = descrption;
     }
+
+    @Override
+    public String toString() {
+        return "MangaDTO{" +
+                "title='" + title + '\'' +
+                ", availibleLanguage='" + availibleLanguage + '\'' +
+                ", genre='" + genre + '\'' +
+                ", mangaId='" + mangaId + '\'' +
+                ", descrption='" + descrption + '\'' +
+                '}';
+    }
 }

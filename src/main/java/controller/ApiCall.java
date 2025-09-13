@@ -34,8 +34,8 @@ public class ApiCall {
 
         try {
             URL url = new URL(baseUrl);
-            HttpsURLConnection connection =  (HttpsURLConnection) url.getContent();
-            connection.setRequestMethod("Get");
+            HttpsURLConnection connection =  (HttpsURLConnection) url.openConnection();
+            //connection.setRequestMethod("Get");
             int code=connection.getResponseCode();
 
             if (code == HttpsURLConnection.HTTP_OK){
@@ -52,7 +52,7 @@ public class ApiCall {
                 JsonArray dataArray = responseObject.getAsJsonArray("data");
 
 
-                for (int x=0; x<=dataArray.size(); x++ ){
+                for (int x=0; x<dataArray.size(); x++ ){
 
                     JsonObject mangaObject=dataArray.get(x).getAsJsonObject();
                     JsonObject mangaAttributes=mangaObject.get("attributes").getAsJsonObject();
@@ -66,9 +66,9 @@ public class ApiCall {
 
                         allLanguages.add(element);
                     }
-                    String title= mangaTitle.get("title").getAsString();
+                    String title= mangaTitle.get("en").getAsString();
                     String mangaID= mangaObject.get("id").getAsString();
-                    String mangaDesc=mangaDescription.get("description").getAsString();
+                    String mangaDesc=mangaDescription.get("en").getAsString();
                     String mangaGenre="shsfdgsf";
 
                     MangaDTO mangaDTO= new MangaDTO(title,"dfgnfhg",mangaID,mangaGenre,mangaDesc);
