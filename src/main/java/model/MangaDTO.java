@@ -1,16 +1,22 @@
 package model;
 
+import java.util.List;
+
 public class MangaDTO {
 
     private String title;
-    private String availibleLanguage;
+    private List<String> availibleLanguage;
     private String genre;
     private String mangaId;
-    private String descrption;
+    private String description;
 
-    public MangaDTO(String title,String availibleLanguage, String genre, String mangaId, String descrption){
+    public MangaDTO(String title,List<String> availibleLanguage, String genre, String mangaId, String description){
 
-        this.title=title; this.availibleLanguage=availibleLanguage; this.genre=genre; this.mangaId=mangaId; this.descrption=descrption;
+        this.title=title;
+        this.availibleLanguage=availibleLanguage;
+        this.genre=genre;
+        this.mangaId=mangaId;
+        this.description = description;
 
     }
 
@@ -22,11 +28,11 @@ public class MangaDTO {
         this.title = title;
     }
 
-    public String getAvailibleLanguage() {
+    public List<String> getAvailibleLanguage() {
         return availibleLanguage;
     }
 
-    public void setAvailibleLanguage(String availibleLanguage) {
+    public void setAvailibleLanguage(List<String> availibleLanguage) {
         this.availibleLanguage = availibleLanguage;
     }
 
@@ -46,12 +52,12 @@ public class MangaDTO {
         this.mangaId = mangaId;
     }
 
-    public String getDescrption() {
-        return descrption;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescrption(String descrption) {
-        this.descrption = descrption;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -61,7 +67,7 @@ public class MangaDTO {
                 ", availibleLanguage='" + availibleLanguage + '\'' +
                 ", genre='" + genre + '\'' +
                 ", mangaId='" + mangaId + '\'' +
-                ", descrption='" + descrption + '\'' +
+                ", descrption='" + description + '\'' +
                 '}';
     }
 }

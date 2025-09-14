@@ -6,7 +6,7 @@ public class Main {
 
         SearchByNameImp searchByNameImp = new SearchByNameImp();
 
-        System.out.println(searchByNameImp.searchMangaByName("dfgsf"));
+        System.out.println(searchByNameImp.searchMangaByName("i"));
 
     }
 }
