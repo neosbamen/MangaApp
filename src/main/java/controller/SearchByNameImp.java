@@ -55,24 +55,21 @@ public class SearchByNameImp extends ApiCall {
                     for (String element: titleElement){
                         mainTitle=mangaTitle.get(element).getAsString();
                     }
+
                     JsonObject mangaDescription=mangaAttributes.getAsJsonObject("description");
+                    String description=mangaDescription.get("en").getAsString();
                     JsonArray languages = mangaAttributes.getAsJsonArray("availableTranslatedLanguages");
                     List<String>  languagesList= new ArrayList<>();
 
                     for (JsonElement element:languages){
 
                         languagesList.add(element.getAsString());
-
                     }
 
-                    Set<String> description=mangaDescription.keySet();
-
-                    description.stream().toList();
                     String mangaID= mangaObject.get("id").getAsString();
-                    //String mangaDesc=mangaDescription.get("en").getAsString();
                     String mangaGenre="shsfdgsf";
 
-                    MangaDTO mangaDTO= new MangaDTO(mainTitle,languagesList,"jhg",mangaID,description.toString());
+                    MangaDTO mangaDTO= new MangaDTO(mainTitle,languagesList,"jhg",mangaID,description);
                     addManga(mangaDTO);
                 }
             }else {
