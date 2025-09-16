@@ -114,6 +114,7 @@ public class SearchByNameImp extends ApiCall {
                     JsonObject singleChapter =chapterArray.get(z).getAsJsonObject();
                     String chapterID=singleChapter.get("id").getAsString();
                     JsonObject chapterAttributes= singleChapter.get("attributes").getAsJsonObject();
+                    String numChapter= chapterAttributes.get("chapter").getAsString();
                     String chapterTitle=chapterAttributes.get("title").getAsString();
                     String chapterLanguage=chapterAttributes.get("translatedLanguage").getAsString();
                     JsonElement chapterExternalUrl=chapterAttributes.get("externalUrl");
@@ -128,7 +129,7 @@ public class SearchByNameImp extends ApiCall {
                         chapterChecked=chapterExternalUrl.getAsString();
                     }
 
-                    ChapterDTO chapterDTO = new ChapterDTO(chapterTitle,chapterLanguage,chapterID, chapterChecked);
+                    ChapterDTO chapterDTO = new ChapterDTO(chapterTitle,numChapter,chapterLanguage,chapterID, chapterChecked);
 
                     addMangaChapter(chapterDTO);
                 }
@@ -153,7 +154,7 @@ public class SearchByNameImp extends ApiCall {
 
         }catch (Exception exception){
 
-            throw new RuntimeException("Error");
+            throw new RuntimeException(exception.getMessage());
         }
         return getChapterList();
     }

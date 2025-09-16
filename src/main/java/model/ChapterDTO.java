@@ -3,12 +3,14 @@ package model;
 public class ChapterDTO {
 
     private String title;
+    private String numChapter;
     private String availibleLanguage;
     private String chapterId;
     private String externalUrl;
 
-    public ChapterDTO(String title, String availibleLanguage, String chapterId, String externalUrl) {
+    public ChapterDTO(String title, String numChapter, String availibleLanguage, String chapterId, String externalUrl) {
         this.title = title;
+        this.numChapter=numChapter;
         this.availibleLanguage = availibleLanguage;
         this.chapterId = chapterId;
         this.externalUrl = externalUrl;
@@ -20,6 +22,14 @@ public class ChapterDTO {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getNumChapter() {
+        return numChapter;
+    }
+
+    public void setNumChapter(String numChapter) {
+        this.numChapter = numChapter;
     }
 
     public String getAvailibleLanguage() {
@@ -50,6 +60,7 @@ public class ChapterDTO {
     public String toString() {
         return "ChapterDTO{" +
                 "title='" + title + '\'' +
+                ", numChapter='" + numChapter + '\'' +
                 ", availibleLanguage='" + availibleLanguage + '\'' +
                 ", chapterId='" + chapterId + '\'' +
                 ", externalUrl='" + externalUrl + '\'' +

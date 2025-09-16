@@ -15,6 +15,7 @@ public abstract class ApiCall implements IManga{
     public ApiCall(){
         mangaDTOList=new ArrayList<>();
         chapterDTOList=new ArrayList<>();
+        pageDTOList=new ArrayList<>();
     }
 
 
