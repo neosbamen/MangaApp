@@ -16,7 +16,7 @@ public class SearchByTrending implements IManga{
 
 
     @Override
-    public List<ChapterDTO> searchByChapter(String mangaId) {
+    public List<ChapterDTO> searchByChapter(String mangaId, String languages) {
         return List.of();
     }
 

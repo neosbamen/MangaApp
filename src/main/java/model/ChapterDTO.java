@@ -45,4 +45,14 @@ public class ChapterDTO {
     public void setExternalUrl(String externalUrl) {
         this.externalUrl = externalUrl;
     }
+
+    @Override
+    public String toString() {
+        return "ChapterDTO{" +
+                "title='" + title + '\'' +
+                ", availibleLanguage='" + availibleLanguage + '\'' +
+                ", chapterId='" + chapterId + '\'' +
+                ", externalUrl='" + externalUrl + '\'' +
+                '}';
+    }
 }

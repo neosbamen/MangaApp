@@ -13,7 +13,7 @@ public class SearchByChapter implements IManga{
     }
 
     @Override
-    public List<ChapterDTO> searchByChapter(String mangaId) {
+    public List<ChapterDTO> searchByChapter(String mangaId, String languageIndex) {
         return List.of();
     }
 

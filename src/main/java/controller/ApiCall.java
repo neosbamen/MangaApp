@@ -14,6 +14,7 @@ public abstract class ApiCall implements IManga{
 
     public ApiCall(){
         mangaDTOList=new ArrayList<>();
+        chapterDTOList=new ArrayList<>();
     }
 
 
@@ -37,6 +38,10 @@ public abstract class ApiCall implements IManga{
 
     protected List<MangaDTO> getMangaList(){
         return mangaDTOList;
+    }
+
+    protected List<ChapterDTO> getChapterList(){
+        return chapterDTOList;
     }
 
 
