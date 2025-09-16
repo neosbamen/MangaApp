@@ -8,7 +8,7 @@ public class Main {
         SearchByNameImp searchByNameImp = new SearchByNameImp();
 
         //System.out.println(searchByNameImp.searchMangaByName("h"));
-        System.out.println(searchByNameImp.searchByChapter("d8a959f7-648e-4c8d-8f23-f1f3f8e129f3","es-la"));
+        System.out.println(searchByNameImp.searchByChapter("75ee72ab-c6bf-4b87-badd-de839156934c","en"));
 
     }
 }

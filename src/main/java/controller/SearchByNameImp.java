@@ -110,7 +110,7 @@ public class SearchByNameImp extends ApiCall {
                 JsonObject chapterObject= JsonParser.parseString(stringBuilder.toString()).getAsJsonObject();
                 JsonArray chapterArray= chapterObject.get("data").getAsJsonArray();
 
-                for (int z=0;z<chapterArray.size();z++){
+                /*for (int z=0;z<chapterArray.size();z++){
                     JsonObject singleChapter =chapterArray.get(z).getAsJsonObject();
                     String chapterID=singleChapter.get("id").getAsString();
                     JsonObject chapterAttributes= singleChapter.get("attributes").getAsJsonObject();
@@ -132,21 +132,28 @@ public class SearchByNameImp extends ApiCall {
                     ChapterDTO chapterDTO = new ChapterDTO(chapterTitle,numChapter,chapterLanguage,chapterID, chapterChecked);
 
                     addMangaChapter(chapterDTO);
-                }
+                }*/
 
-                /*chapterArray.forEach(jsonElement -> {
+                chapterArray.forEach(jsonElement -> {
+
                     JsonObject singleChapter = jsonElement.getAsJsonObject();
                     String chapterID=singleChapter.get("id").getAsString();
                     JsonObject chapterAttributes= singleChapter.get("attributes").getAsJsonObject();
+                    String numChapter= chapterAttributes.get("chapter").getAsString();
                     String chapterTitle=chapterAttributes.get("title").getAsString();
                     String chapterLanguage=chapterAttributes.get("translatedLanguage").getAsString();
-                    String chapterExternalUrl=chapterAttributes.get("externalUrl").getAsString();
+                    JsonElement chapterExternalUrl=chapterAttributes.get("externalUrl");
+                    String externalUrlChecked="null";
 
-                    ChapterDTO chapterDTO = new ChapterDTO(chapterTitle,chapterLanguage,chapterID,chapterExternalUrl);
+                    if (!chapterExternalUrl.isJsonNull()){
+                        externalUrlChecked=chapterExternalUrl.getAsString();
+                    }
+
+                    ChapterDTO chapterDTO = new ChapterDTO(chapterTitle,numChapter,chapterLanguage,chapterID,externalUrlChecked);
 
                     addMangaChapter(chapterDTO);
 
-                });*/
+                });
 
             }else {
                 throw new RuntimeException("Error");
