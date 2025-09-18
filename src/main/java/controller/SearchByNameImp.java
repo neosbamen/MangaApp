@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
+import java.util.jar.Attributes;
 
 public class SearchByNameImp extends ApiCall {
 
@@ -55,7 +56,15 @@ public class SearchByNameImp extends ApiCall {
                     }
 
                     JsonObject mangaDescription=mangaAttributes.getAsJsonObject("description");
-                    String description=mangaDescription.get("en").getAsString();
+                    Set<String> descriptions=mangaDescription.keySet();
+                    String descriptionFound="No description";
+
+                    for (String element:descriptions){
+
+                        descriptionFound=mangaDescription.get(element).getAsString();
+
+                    }
+
                     JsonArray languages = mangaAttributes.getAsJsonArray("availableTranslatedLanguages");
                     List<String>  languagesList= new ArrayList<>();
 
@@ -67,7 +76,7 @@ public class SearchByNameImp extends ApiCall {
                     String mangaID= mangaObject.get("id").getAsString();
                     String mangaGenre="shsfdgsf";
 
-                    MangaDTO mangaDTO= new MangaDTO(mainTitle,languagesList,"jhg",mangaID,description);
+                    MangaDTO mangaDTO= new MangaDTO(mainTitle,languagesList,"jhg",mangaID,descriptionFound);
                     addManga(mangaDTO);
                 }
             }else {
@@ -110,51 +119,33 @@ public class SearchByNameImp extends ApiCall {
                 JsonObject chapterObject= JsonParser.parseString(stringBuilder.toString()).getAsJsonObject();
                 JsonArray chapterArray= chapterObject.get("data").getAsJsonArray();
 
-                /*for (int z=0;z<chapterArray.size();z++){
-                    JsonObject singleChapter =chapterArray.get(z).getAsJsonObject();
-                    String chapterID=singleChapter.get("id").getAsString();
-                    JsonObject chapterAttributes= singleChapter.get("attributes").getAsJsonObject();
-                    String numChapter= chapterAttributes.get("chapter").getAsString();
-                    String chapterTitle=chapterAttributes.get("title").getAsString();
-                    String chapterLanguage=chapterAttributes.get("translatedLanguage").getAsString();
-                    JsonElement chapterExternalUrl=chapterAttributes.get("externalUrl");
-
-                    // condicional para validar si el elemento chapterExternalUrl es null.
-                    // de ser asi le aseginamos el valor en String "null" a la variable chapterChecked
-                    // y la guardamos en el ChaperDTO
-                    String chapterChecked="null";
-
-                    if (!chapterExternalUrl.isJsonNull()){
-
-                        chapterChecked=chapterExternalUrl.getAsString();
-                    }
-
-                    ChapterDTO chapterDTO = new ChapterDTO(chapterTitle,numChapter,chapterLanguage,chapterID, chapterChecked);
-
-                    addMangaChapter(chapterDTO);
-                }*/
-
                 chapterArray.forEach(jsonElement -> {
-
                     JsonObject singleChapter = jsonElement.getAsJsonObject();
-                    String chapterID=singleChapter.get("id").getAsString();
-                    JsonObject chapterAttributes= singleChapter.get("attributes").getAsJsonObject();
-                    String numChapter= chapterAttributes.get("chapter").getAsString();
-                    String chapterTitle=chapterAttributes.get("title").getAsString();
-                    String chapterLanguage=chapterAttributes.get("translatedLanguage").getAsString();
-                    JsonElement chapterExternalUrl=chapterAttributes.get("externalUrl");
-                    String externalUrlChecked="null";
+                    JsonObject attributes = singleChapter.getAsJsonObject("attributes");
 
-                    if (!chapterExternalUrl.isJsonNull()){
-                        externalUrlChecked=chapterExternalUrl.getAsString();
-                    }
+                    String chaperId = singleChapter.has("id") && !singleChapter.get("id").isJsonNull()
+                            ? singleChapter.get("id").getAsString()
+                            : "Sin Numero ID";
 
-                    ChapterDTO chapterDTO = new ChapterDTO(chapterTitle,numChapter,chapterLanguage,chapterID,externalUrlChecked);
+                    String titleChapter = attributes.has("title") && !attributes.get("title").isJsonNull()
+                            ? attributes.get("title").getAsString()
+                            : "sin titulo";
 
+                    String numChapter = attributes.has("chapter") && !attributes.get("chapter").isJsonNull()
+                            ? attributes.get("chapter").getAsString()
+                            : "No numeracion para el capitulo";
+
+                    String chapterLanguages = attributes.has("translatedLanguage") && !attributes.get("translatedLanguage").isJsonNull()
+                            ? attributes.get("translatedLanguage").getAsString()
+                            : "sin idioma";
+
+                    String chapterUrl = attributes.has("externalUrl") && !attributes.get("externalUrl").isJsonNull()
+                            ? attributes.get("externalUrl").getAsString()
+                            : "No externa url";
+
+                    ChapterDTO chapterDTO = new ChapterDTO(titleChapter,numChapter,chapterLanguages,chaperId,chapterUrl);
                     addMangaChapter(chapterDTO);
-
                 });
-
             }else {
                 throw new RuntimeException("Error");
             }
