@@ -11,7 +11,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
-import java.util.jar.Attributes;
 
 public class SearchByNameImp extends ApiCall {
 
@@ -47,6 +46,24 @@ public class SearchByNameImp extends ApiCall {
                 for (int x = 0; x < dataArray.size(); x++) {
                     JsonObject mangaObject=dataArray.get(x).getAsJsonObject();
                     JsonObject mangaAttributes=mangaObject.get("attributes").getAsJsonObject();
+                    JsonArray mangaTags=mangaAttributes.getAsJsonArray("tags");
+                    List<String>  tagsList= new ArrayList<>();
+
+                    for (JsonElement element:mangaTags){
+
+                        JsonObject tagObject= element.getAsJsonObject();
+                        JsonObject tagAttributes=tagObject.getAsJsonObject("attributes");
+                        JsonObject tagName=tagAttributes.getAsJsonObject("name");
+                        Set<String> names=tagName.keySet();
+                        String fileName="";
+                        for (String nameEachTag: names){
+
+                        fileName=tagName.get(nameEachTag).getAsString();
+
+                        tagsList.add(fileName);
+                        }
+                    }
+
                     String mainTitle="";
                     JsonObject mangaTitle= mangaAttributes.get("title").getAsJsonObject();
 
@@ -76,7 +93,7 @@ public class SearchByNameImp extends ApiCall {
                     String mangaID= mangaObject.get("id").getAsString();
                     String mangaGenre="shsfdgsf";
 
-                    MangaDTO mangaDTO= new MangaDTO(mainTitle,languagesList,"jhg",mangaID,descriptionFound);
+                    MangaDTO mangaDTO= new MangaDTO(mainTitle,languagesList,tagsList,mangaID,descriptionFound);
                     addManga(mangaDTO);
                 }
             }else {
