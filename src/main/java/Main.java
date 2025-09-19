@@ -14,7 +14,7 @@ public class Main {
         /*El main espera recibir un input con el nombre del manga a buscar
         pero el metodo  searchMangaByName no reconoce espacios vacios
         se arregla asegurandonos de que si el input viene con espacios vacios cambiar por %20*/
-        List<MangaDTO> dtoList=searchByNameImp.searchMangaByName("death%20note");
+        List<MangaDTO> dtoList=searchByNameImp.searchMangaByName("f");
 
         System.out.println();
 
