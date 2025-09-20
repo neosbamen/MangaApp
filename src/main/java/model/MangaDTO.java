@@ -6,11 +6,11 @@ public class MangaDTO {
 
     private String title;
     private List<String> availibleLanguage;
-    private String genre;
+    private List<String> genre;
     private String mangaId;
     private String description;
 
-    public MangaDTO(String title,List<String> availibleLanguage, String genre, String mangaId, String description){
+    public MangaDTO(String title,List<String> availibleLanguage, List<String> genre, String mangaId, String description){
 
         this.title=title;
         this.availibleLanguage=availibleLanguage;
@@ -36,11 +36,11 @@ public class MangaDTO {
         this.availibleLanguage = availibleLanguage;
     }
 
-    public String getGenre() {
+    public List<String> getGenre() {
         return genre;
     }
 
-    public void setGenre(String genre) {
+    public void setGenre(List<String> genre) {
         this.genre = genre;
     }
 
