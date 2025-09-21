@@ -6,7 +6,9 @@ import model.PageDTO;
 
 import java.util.List;
 
-public class SearchByChapter implements IManga{
+public class searchByGenre implements IManga{
+
+
     @Override
     public List<MangaDTO> searchMangaByName(String name) {
         return List.of();
