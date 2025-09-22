@@ -10,6 +10,8 @@ public class MangaDTO {
     private String mangaId;
     private String description;
 
+    public MangaDTO(){}
+
     public MangaDTO(String title,List<String> availibleLanguage, List<String> genre, String mangaId, String description){
 
         this.title=title;

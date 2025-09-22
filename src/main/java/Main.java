@@ -1,20 +1,17 @@
-import controller.ApiCall;
 import controller.SearchByNameImp;
-import model.MangaDTO;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 public class Main {
 
     public static void main(String[] args) {
+        SearchByNameImp buscarMangas = new SearchByNameImp();
+        buscarMangas.searchMangaByName("Pokemon")
+                .forEach(manga -> System.out.println(manga.getTitle()));
 
-        SearchByNameImp searchByNameImp = new SearchByNameImp();
+        //SearchByNameImp searchByNameImp = new SearchByNameImp();
         /*El main espera recibir un input con el nombre del manga a buscar
         pero el metodo  searchMangaByName no reconoce espacios vacios
         se arregla asegurandonos de que si el input viene con espacios vacios cambiar por %20*/
-        List<MangaDTO> dtoList=searchByNameImp.searchMangaByName("f");
+        /*List<MangaDTO> dtoList=searchByNameImp.searchMangaByName("f");
 
         System.out.println();
 
@@ -28,9 +25,9 @@ public class Main {
 
         String id = model.getMangaId();
         System.out.println(language);
-        System.out.println("id = " + id);
+        System.out.println("id = " + id);*/
 
-        System.out.println(searchByNameImp.searchByChapter(id, optLanguage.orElse("en")));
+        //System.out.println(searchByNameImp.searchByChapter(id, optLanguage.orElse("en")));
 
     }
 }

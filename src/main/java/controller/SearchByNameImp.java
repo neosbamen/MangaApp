@@ -1,21 +1,9 @@
 package controller;
 
-import com.google.gson.*;
-import model.ChapterDTO;
-import model.MangaDTO;
-import model.PageDTO;
-import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.*;
-
-public class SearchByNameImp extends ApiCall {
+public class SearchByNameImp extends Manga {
 
 
-    @Override
+    /*@Override
     public List<MangaDTO> searchMangaByName(String name) {
 
         int offset = 0;
@@ -177,5 +165,5 @@ public class SearchByNameImp extends ApiCall {
     @Override
     public List<PageDTO> gettingPages(String chapterID) {
         return List.of();
-    }
+    }*/
 }

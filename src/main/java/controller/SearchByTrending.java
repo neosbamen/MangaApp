@@ -1,12 +1,10 @@
 package controller;
 
-import model.ChapterDTO;
 import model.MangaDTO;
-import model.PageDTO;
 
 import java.util.List;
 
-public class SearchByTrending implements IManga{
+public class SearchByTrending extends Manga {
 
 
     @Override
@@ -15,7 +13,7 @@ public class SearchByTrending implements IManga{
     }
 
 
-    @Override
+    /*@Override
     public List<ChapterDTO> searchByChapter(String mangaId, String languages) {
         return List.of();
     }
@@ -23,5 +21,5 @@ public class SearchByTrending implements IManga{
     @Override
     public List<PageDTO> gettingPages(String chapterID) {
         return List.of();
-    }
+    }*/
 }

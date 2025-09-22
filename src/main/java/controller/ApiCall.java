@@ -1,11 +1,11 @@
-package controller;;
+package controller;
 import model.ChapterDTO;
 import model.MangaDTO;
 import model.PageDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ApiCall implements IManga{
+public abstract class ApiCall extends Manga {
 
     protected List<MangaDTO> mangaDTOList;
     protected List<ChapterDTO> chapterDTOList;
