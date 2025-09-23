@@ -1,11 +1,56 @@
-import controller.SearchByNameImp;
+import controller.SearchByName;
+import model.MangaModel;
+
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Main {
 
     public static void main(String[] args) {
-        SearchByNameImp buscarMangas = new SearchByNameImp();
-        buscarMangas.searchMangaByName("Pokemon")
-                .forEach(manga -> System.out.println(manga.getTitle()));
+        Scanner scanner =new Scanner(System.in);
+
+        System.out.println("            Bienvenido a Cueva Manga\n" +
+                "1. Buscar Manga por nombre\n" +
+                "2. Sugerir Manga popular\n" +
+                "3. Buscar Manga por genero\n");
+
+        String optionInput= scanner.nextLine();
+
+
+        switch (optionInput){
+
+
+            case "1":
+
+                 SearchByName buscarMangas = new SearchByName();
+
+                System.out.println("Ingrese nombre del Manga");
+                String mangaName=scanner.nextLine();
+                System.out.println("elije un manga");
+                List<MangaModel> mangas = buscarMangas.searchMangaByName(mangaName);
+
+                IntStream.range(0, mangas.size())
+                        .forEach(i -> System.out.println((i+1) + " - " + mangas.get(i).getTitle()));
+
+                String mangaOption= scanner.next();
+                int index=Integer.parseInt(mangaOption)-1;
+
+                MangaModel mangaDTOModel = mangas.get(index);
+
+                System.out.println("Title"+" "+mangaDTOModel.getTitle());
+                System.out.println("Available Languages"+" "+mangaDTOModel.getAvailibleLanguage());
+                System.out.println();
+                System.out.println("### "+mangaDTOModel.getDescription()+" ###");
+
+                break;
+
+            case "2":
+
+
+        }
+
+
 
         //SearchByNameImp searchByNameImp = new SearchByNameImp();
         /*El main espera recibir un input con el nombre del manga a buscar

@@ -1,6 +1,6 @@
 package model;
 
-public class ChapterDTO {
+public class ChapterModel {
 
     private String title;
     private String numChapter;
@@ -8,7 +8,7 @@ public class ChapterDTO {
     private String chapterId;
     private String externalUrl;
 
-    public ChapterDTO(String title, String numChapter, String availibleLanguage, String chapterId, String externalUrl) {
+    public ChapterModel(String title, String numChapter, String availibleLanguage, String chapterId, String externalUrl) {
         this.title = title;
         this.numChapter=numChapter;
         this.availibleLanguage = availibleLanguage;

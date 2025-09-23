@@ -2,14 +2,14 @@ package model;
 
 import java.util.List;
 
-public class PageDTO {
+public class PageModel {
 
     private String hash;
     private String baseUrl;
     private List<String> dataList;
     private List<String> dataServerList;
 
-    public PageDTO(List<String> dataServerList, List<String> dataList, String baseUrl, String hash) {
+    public PageModel(List<String> dataServerList, List<String> dataList, String baseUrl, String hash) {
         this.dataServerList = dataServerList;
         this.dataList = dataList;
         this.baseUrl = baseUrl;

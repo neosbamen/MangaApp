@@ -1,14 +1,14 @@
 package controller;
 
-import model.MangaDTO;
+import model.MangaModel;
 
 import java.util.List;
 
-public class SearchByTrending extends Manga {
+public class SearchByTrending extends MangaManager {
 
 
     @Override
-    public List<MangaDTO> searchMangaByName(String name) {
+    public List<MangaModel> searchMangaByName(String name) {
         return List.of();
     }
 

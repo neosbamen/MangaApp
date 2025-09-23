@@ -1,6 +1,15 @@
 package controller;
+import model.MangaModel;
+import java.util.List;
 
-public class SearchByNameImp extends Manga {
+public class SearchByName extends MangaManager {
+
+    @Override
+    public List<MangaModel> searchMangaByName(String name) {
+        return super.searchMangaByName(name);
+    }
+
+
 
 
     /*@Override
@@ -93,10 +102,10 @@ public class SearchByNameImp extends Manga {
             throw new RuntimeException(e);
         }
         return getMangaList();
-    }
+    }*/
 
-    @Override
-    public List<ChapterDTO> searchByChapter(String mangaId, String languageIndex) {
+    /* @Override
+   public List<ChapterDTO> searchByChapter(String mangaId, String languageIndex) {
 
         int offset = 0;
         String baseUrl="https://api.mangadex.org/chapter?manga=";
@@ -160,9 +169,9 @@ public class SearchByNameImp extends Manga {
             throw new RuntimeException(exception.getMessage());
         }
         return getChapterList();
-    }
+    }*/
 
-    @Override
+   /* @Override
     public List<PageDTO> gettingPages(String chapterID) {
         return List.of();
     }*/

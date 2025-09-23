@@ -4,8 +4,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import model.ChapterDTO;
-import model.MangaDTO;
+import model.ChapterModel;
+import model.MangaModel;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public abstract class Manga {
+public abstract class MangaManager extends ApiStorage{
 
     private final String BASE_URL_MANGA = "https://api.mangadex.org/manga?title=";
     private final String BASE_URL_CHAPTER = "https://api.mangadex.org/chapter?manga=";
@@ -29,10 +29,10 @@ public abstract class Manga {
     private String languageChaper = "&translatedLanguage[]=".concat(languageManga);
     private String urlBuilt = "";
 
-    public List<MangaDTO> searchMangaByName(String name) {
+    protected List<MangaModel> searchMangaByName(String name) {
         this.nameManga = name;
         this.urlBuilt = BASE_URL_MANGA.concat(name).concat(BASE_LIMIT_MANGA).concat(String.valueOf(offset));
-        List<MangaDTO> mangas = new ArrayList<>();
+        //List<MangaDTO> mangas = new ArrayList<>();
 
         try {
             int code = urlConnection().getResponseCode();
@@ -48,14 +48,17 @@ public abstract class Manga {
                     JsonObject mangaAttributes = mangaObject.get("attributes").getAsJsonObject();
                     JsonArray tagsArray = mangaAttributes.getAsJsonArray("tags");
                     String mangaID = mangaObject.get("id").getAsString();
-                    MangaDTO manga = new MangaDTO();
+                    MangaModel manga = new MangaModel();
                     manga.setGenre(listTagsManga(tagsArray));
                     manga.setTitle(titleManga(mangaAttributes));
                     manga.setMangaId(mangaID);
                     manga.setDescription(descriptionManga(mangaAttributes));
                     manga.setAvailibleLanguage(languageManga(mangaAttributes));
 
-                    mangas.add(manga);
+                   // mangas.add(manga);
+
+                    addManga(manga);
+
                 });
             } else {
                 System.out.println("ERROR AL CONSUMIR");
@@ -64,7 +67,7 @@ public abstract class Manga {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return mangas;
+        return getMangaList();
     }
 
     private List<String> languageManga(JsonObject mangaAttributes) {
@@ -132,7 +135,7 @@ public abstract class Manga {
         return connection;
     }
 
-    List<ChapterDTO> searchByChapter(String mangaId, String languageIndex) {
+    List<ChapterModel> searchByChapter(String mangaId, String languageIndex) {
 
 
         return List.of();
