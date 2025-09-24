@@ -1,49 +1,51 @@
 package controller;
-import model.ChapterModel;
-import model.MangaModel;
-import model.PageModel;
+import model.Chapter;
+import model.Manga;
+import model.Page;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ApiStorage {
 
-    protected List<MangaModel> mangaDTOList;
-    protected List<ChapterModel> chapterDTOList;
-    protected List<PageModel>pageDTOList;
+    protected List<Manga> mangaList;
+    protected List<Chapter> chapterList;
+    protected List<Page> pageList;
 
 
     public ApiStorage(){
-        mangaDTOList=new ArrayList<>();
-        chapterDTOList=new ArrayList<>();
-        pageDTOList=new ArrayList<>();
+        mangaList =new ArrayList<>();
+        chapterList =new ArrayList<>();
+        pageList =new ArrayList<>();
     }
 
 
-    protected void addManga(MangaModel mangaDTO){
+    protected void addManga(Manga manga){
 
-        mangaDTOList.add(mangaDTO);
-
-    }
-
-    protected void addMangaChapter(ChapterModel chapterDTO){
-
-        chapterDTOList.add(chapterDTO);
+        mangaList.add(manga);
 
     }
 
-    protected void addMangaPage(PageModel pageDTO){
+    protected void addMangaChapter(Chapter chapter){
 
-        pageDTOList.add(pageDTO);
+        chapterList.add(chapter);
 
     }
 
-    protected List<MangaModel> getMangaList(){
-        return mangaDTOList;
+    protected void addMangaPage(Page page){
+
+        pageList.add(page);
+
     }
 
-    protected List<ChapterModel> getChapterList(){
-        return chapterDTOList;
+    protected List<Manga> getMangaList(){
+        return mangaList;
     }
 
+    protected List<Chapter> getChapterList(){
+        return chapterList;
+    }
 
+    public List<Page> getPageList() {
+        return pageList;
+    }
 }

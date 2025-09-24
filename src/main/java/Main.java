@@ -1,5 +1,6 @@
 import controller.SearchByName;
-import model.MangaModel;
+import model.Manga;
+import model.Chapter;
 
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +10,9 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner =new Scanner(System.in);
+        SearchByName buscarMangas = new SearchByName();
+
+
 
         System.out.println("            Bienvenido a Cueva Manga\n" +
                 "1. Buscar Manga por nombre\n" +
@@ -20,28 +24,39 @@ public class Main {
 
         switch (optionInput){
 
-
             case "1":
-
-                 SearchByName buscarMangas = new SearchByName();
 
                 System.out.println("Ingrese nombre del Manga");
                 String mangaName=scanner.nextLine();
                 System.out.println("elije un manga");
-                List<MangaModel> mangas = buscarMangas.searchMangaByName(mangaName);
+                List<Manga> mangas = buscarMangas.searchMangaName(mangaName);
 
                 IntStream.range(0, mangas.size())
-                        .forEach(i -> System.out.println((i+1) + " - " + mangas.get(i).getTitle()));
+                        /*Los mangas pueden decir que vienen traducidos a un dicho idioma pero la verdad es que puede
+                        * que no sea asi, entonces nos retornara una lista vacia porque ningun manga o capitulo
+                        * coincide con el idioma que le pasamos*/
+                        .forEach(i -> System.out.println((i+1) + " - " + (mangas.get(i).getTitle())+mangas.get(i).getAvailibleLanguage()));
 
                 String mangaOption= scanner.next();
                 int index=Integer.parseInt(mangaOption)-1;
 
-                MangaModel mangaDTOModel = mangas.get(index);
+                Manga mangaFound = mangas.get(index);
 
-                System.out.println("Title"+" "+mangaDTOModel.getTitle());
-                System.out.println("Available Languages"+" "+mangaDTOModel.getAvailibleLanguage());
+                System.out.println("Title: "+mangaFound.getTitle());
+                System.out.println("Available Languages"+" "+mangaFound.getAvailibleLanguage());
                 System.out.println();
-                System.out.println("### "+mangaDTOModel.getDescription()+" ###");
+                System.out.println("### "+mangaFound.getDescription()+" ###");
+
+
+                /*Cuando le damos el idioma para filtrar, hay que tener en cuenta que no todos los capitulos van a estar
+                disponibles en ese idioma. Lo mejor es primero verificar que idiomas estan disponibles por Manga y de ahi
+                si podremos filtrar capitulos por idioma*/
+                List<Chapter> chapterList=buscarMangas.searchByChapter(mangaFound.getMangaId(),mangaFound.getAvailibleLanguage().get(0));
+
+                IntStream.range(0, chapterList.size())
+                        .forEach(i -> System.out.println((i+1) + " - " + chapterList.get(i).getTitle()));
+
+                System.out.println(chapterList);
 
                 break;
 
@@ -50,29 +65,6 @@ public class Main {
 
         }
 
-
-
-        //SearchByNameImp searchByNameImp = new SearchByNameImp();
-        /*El main espera recibir un input con el nombre del manga a buscar
-        pero el metodo  searchMangaByName no reconoce espacios vacios
-        se arregla asegurandonos de que si el input viene con espacios vacios cambiar por %20*/
-        /*List<MangaDTO> dtoList=searchByNameImp.searchMangaByName("f");
-
-        System.out.println();
-
-        MangaDTO model=dtoList.stream().findFirst().get();//Lo dejo sin validar pero debemos tratar el posible null
-        System.out.println();
-        System.out.println("model = " + model);
-        List<String> language= model.getAvailibleLanguage();
-        Optional<String> optLanguage=language.stream().findAny();
-
-        optLanguage.ifPresent(System.out::println);
-
-        String id = model.getMangaId();
-        System.out.println(language);
-        System.out.println("id = " + id);*/
-
-        //System.out.println(searchByNameImp.searchByChapter(id, optLanguage.orElse("en")));
 
     }
 }

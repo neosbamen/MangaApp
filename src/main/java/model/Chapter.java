@@ -1,6 +1,6 @@
 package model;
 
-public class ChapterModel {
+public class Chapter {
 
     private String title;
     private String numChapter;
@@ -8,7 +8,11 @@ public class ChapterModel {
     private String chapterId;
     private String externalUrl;
 
-    public ChapterModel(String title, String numChapter, String availibleLanguage, String chapterId, String externalUrl) {
+
+    public Chapter() {
+    }
+
+    public Chapter(String title, String numChapter, String availibleLanguage, String chapterId, String externalUrl) {
         this.title = title;
         this.numChapter=numChapter;
         this.availibleLanguage = availibleLanguage;

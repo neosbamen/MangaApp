@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public class MangaModel {
+public class Manga {
 
     private String title;
     private List<String> availibleLanguage;
@@ -10,9 +10,9 @@ public class MangaModel {
     private String mangaId;
     private String description;
 
-    public MangaModel(){}
+    public Manga(){}
 
-    public MangaModel(String title, List<String> availibleLanguage, List<String> genre, String mangaId, String description){
+    public Manga(String title, List<String> availibleLanguage, List<String> genre, String mangaId, String description){
 
         this.title=title;
         this.availibleLanguage=availibleLanguage;

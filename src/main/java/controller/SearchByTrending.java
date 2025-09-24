@@ -1,6 +1,6 @@
 package controller;
 
-import model.MangaModel;
+import model.Manga;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class SearchByTrending extends MangaManager {
 
 
     @Override
-    public List<MangaModel> searchMangaByName(String name) {
+    public List<Manga> searchMangaName(String name) {
         return List.of();
     }
 
