@@ -13,6 +13,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -31,10 +33,10 @@ public abstract class MangaManager extends ApiStorage{
     private String languageManga = "";
     private String languageChaper = "&translatedLanguage[]=";
     private String urlBuilt = "";
-
     protected List<Manga> searchMangaName(String name) {
-        this.nameManga = name;
-        this.urlBuilt = BASE_URL_MANGA.concat(name).concat(BASE_LIMIT_MANGA).concat(String.valueOf(offset));
+        String encodedName = URLEncoder.encode(name, StandardCharsets.UTF_8);
+        this.nameManga = encodedName;
+        this.urlBuilt = BASE_URL_MANGA.concat(nameManga).concat(BASE_LIMIT_MANGA).concat(String.valueOf(offset));
 
         try {
             int code = urlConnection(urlBuilt).getResponseCode();

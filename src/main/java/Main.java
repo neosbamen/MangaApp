@@ -12,43 +12,37 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         SearchByName buscarMangas = new SearchByName();
 
-
-        System.out.println("\t\t\t Bienvenido a Cueva Manga\n" +
+        System.out.print("\t\t-----Bienvenido a Cueva Manga-----\t\t\n" +
                 "1. Buscar Manga por nombre\n" +
                 "2. Sugerir Manga popular\n" +
-                "3. Buscar Manga por genero\n");
-
-        String optionInput = scanner.nextLine();
-
+                "3. Buscar Manga por genero\n\n" +
+                "Opción ->\t"
+        );
+        int optionInput = Integer.parseInt(scanner.nextLine());
 
         switch (optionInput) {
 
-            case "1": {
+            case 1: {
                 System.out.print("Ingrese nombre del Manga ->\t");
                 String mangaName = scanner.nextLine();
-                System.out.print("elije un manga -> \t");
+
                 List<Manga> mangas = buscarMangas.searchMangaName(mangaName);
 
                 IntStream.range(0, mangas.size())
-                        /*Los mangas pueden decir que vienen traducidos a un dicho idioma pero la verdad es que puede
-                         * que no sea asi, entonces nos retornara una lista vacia porque ningun manga o capitulo
-                         * coincide con el idioma que le pasamos*/
                         .forEach(i -> System.out.println((i + 1) + ". " + (mangas.get(i).getTitle()) + mangas.get(i).getAvailibleLanguage()));
 
-                String mangaOption = scanner.next();
+                System.out.print("\n elije un manga -> \t");
+                String mangaOption = scanner.nextLine();
                 int index = Integer.parseInt(mangaOption) - 1;
 
                 Manga mangaFound = mangas.get(index);
 
                 System.out.println("Title: " + mangaFound.getTitle());
-                System.out.println("Available Languages" + " " + mangaFound.getAvailibleLanguage());
-                System.out.println();
-                System.out.println("### " + mangaFound.getDescription() + " ###");
+                System.out.println("Available Languages" + " " + mangaFound.getAvailibleLanguage() + "\n");
+                System.out.println("### " + mangaFound.getDescription() + " ###\n");
                 int results = 0;
                 if (mangaFound.getAvailibleLanguage().size() > 1) {
-                    System.out.println(mangaFound.getAvailibleLanguage().size());
                     System.out.print("Escoja el idioma que leera su manga -> \t");
-                    scanner.nextLine();
                     String chosenLanguage = scanner.nextLine();
 
                     for (int i = 0; i < mangaFound.getAvailibleLanguage().size(); i++) {
@@ -70,7 +64,7 @@ public class Main {
             }
             break;
 
-            case "2":
+            case 2:
 
 
         }
