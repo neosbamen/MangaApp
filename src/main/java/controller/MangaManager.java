@@ -161,13 +161,14 @@ public abstract class MangaManager extends ApiStorage{
                     ?attributes.get("id").getAsString()
                             :"No Id avalable";*/
 
-                    String titleChapter = attributes.has("title") && !attributes.get("title").isJsonNull()
-                            ? attributes.get("title").getAsString()
-                            : "No title available";
 
                     String numChapter = attributes.has("chapter") && !attributes.get("chapter").isJsonNull()
                             ? attributes.get("chapter").getAsString()
                             : "No numeracion para el capitulo";
+
+                    String titleChapter = attributes.has("title") && !attributes.get("title").isJsonNull()
+                            ? attributes.get("title").getAsString()
+                            : "Capitulo - " +numChapter;
 
                     String chapterLanguages = attributes.has("translatedLanguage") && !attributes.get("translatedLanguage").isJsonNull()
                             ? attributes.get("translatedLanguage").getAsString()
