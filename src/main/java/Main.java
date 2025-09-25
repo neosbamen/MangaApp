@@ -48,7 +48,7 @@ public class Main {
                 if (mangaFound.getAvailibleLanguage().size() > 1) {
                     System.out.println(mangaFound.getAvailibleLanguage().size());
                     System.out.print("Escoja el idioma que leera su manga -> \t");
-                    scanner.next();
+                    scanner.nextLine();
                     String chosenLanguage = scanner.nextLine();
 
                     for (int i = 0; i < mangaFound.getAvailibleLanguage().size(); i++) {
@@ -66,7 +66,7 @@ public class Main {
                 IntStream.range(0, chapterList.size())
                         .forEach(i -> System.out.println((i + 1) + ". " + chapterList.get(i).getTitle()));
 
-                //System.out.println(chapterList);
+                System.out.println(chapterList);
             }
             break;
 
