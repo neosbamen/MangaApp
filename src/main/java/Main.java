@@ -53,14 +53,11 @@ public class Main {
                 }
                 List<Chapter> chapterList = buscarMangas.searchByChapter(mangaFound.getMangaId(), mangaFound.getAvailibleLanguage().get(results));
 
-                /*Cuando le damos el idioma para filtrar, hay que tener en cuenta que no todos los capitulos van a estar
-                disponibles en ese idioma. Lo mejor es primero verificar que idiomas estan disponibles por Manga y de ahi
-                si podremos filtrar capitulos por idioma*/
-
                 IntStream.range(0, chapterList.size())
                         .forEach(i -> System.out.println((i + 1) + ". " + chapterList.get(i).getTitle()));
 
-                System.out.println(chapterList);
+                System.out.print("\nTotal de capitulos disponibles: " + buscarMangas.getTotalChapters());
+
             }
             break;
 
