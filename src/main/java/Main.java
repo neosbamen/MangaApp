@@ -59,7 +59,7 @@ public class Main {
                 System.out.print("\nTotal de capitulos disponibles: " + buscarMangas.getTotalChapters()+"\n");
                 System.out.print("Introduzca el numero a capitulo ver -> ");
                 int chosenChapter = Integer.parseInt(scanner.nextLine()) - 1;
-                //System.out.println(buscarMangas.gettingPages(chapterList.get(chosenChapter).getChapterId()));
+                System.out.println(buscarMangas.gettingPages(chapterList.get(chosenChapter).getChapterId()));
 
             }
             break;

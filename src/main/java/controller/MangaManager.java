@@ -127,29 +127,25 @@ public abstract class MangaManager extends ApiStorage {
 
             if (code == HttpsURLConnection.HTTP_OK) {
                 StringBuilder stringBuilder = getStringBuilder();
-
                 JsonObject objectPage = JsonParser.parseString(stringBuilder.toString()).getAsJsonObject();
                 JsonObject hashDataObject = objectPage.get("chapter").getAsJsonObject();
-                JsonArray arrayDataPage = objectPage.get("data").getAsJsonArray();
-                JsonArray arrayDataSaverPage = objectPage.get("dataSaver").getAsJsonArray();
+                JsonArray arrayDataPage = hashDataObject.get("data").getAsJsonArray();
+                JsonArray arrayDataSaverPage = hashDataObject.get("dataSaver").getAsJsonArray();
                 List<String> dataList = new ArrayList<>();
                 List<String> dataSaverList = new ArrayList<>();
-
-                arrayDataPage.forEach(JsonElement -> {
-                    dataList.add(JsonElement.getAsString());
+                arrayDataPage.forEach(elementData -> {
+                    dataList.add(elementData.getAsString());
                 });
 
-                arrayDataSaverPage.forEach(JsonElement -> {
-                    dataSaverList.add(JsonElement.getAsString());
+                arrayDataSaverPage.forEach(elementSaver -> {
+                    dataSaverList.add(elementSaver.getAsString());
                 });
-
                 Page pageModel = new Page();
 
                 pageModel.setBaseUrl(objectPage.get("baseUrl").getAsString());
                 pageModel.setHash(hashDataObject.get("hash").getAsString());
                 pageModel.setDataList(dataList);
                 pageModel.setDataServerList(dataSaverList);
-
                 addMangaPage(pageModel);
             }
         } catch (Exception exception) {
