@@ -56,7 +56,10 @@ public class Main {
                 IntStream.range(0, chapterList.size())
                         .forEach(i -> System.out.println((i + 1) + ". " + chapterList.get(i).getTitle()));
 
-                System.out.print("\nTotal de capitulos disponibles: " + buscarMangas.getTotalChapters());
+                System.out.print("\nTotal de capitulos disponibles: " + buscarMangas.getTotalChapters()+"\n");
+                System.out.print("Introduzca el numero a capitulo ver -> ");
+                int chosenChapter = Integer.parseInt(scanner.nextLine()) - 1;
+                //System.out.println(buscarMangas.gettingPages(chapterList.get(chosenChapter).getChapterId()));
 
             }
             break;

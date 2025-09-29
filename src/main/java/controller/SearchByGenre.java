@@ -4,7 +4,7 @@ import model.Manga;
 
 import java.util.List;
 
-public class searchByGenre extends MangaManager {
+public class SearchByGenre extends MangaManager {
 
 
     @Override

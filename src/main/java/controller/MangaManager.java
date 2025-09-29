@@ -119,6 +119,46 @@ public abstract class MangaManager extends ApiStorage {
         return getChapterList();
     }
 
+    List<Page> gettingPages(String chapterID) {
+        this.urlBuilt = BASE_URL_PAGE.concat(chapterID);
+
+        try {
+            int code = urlConnection(urlBuilt).getResponseCode();
+
+            if (code == HttpsURLConnection.HTTP_OK) {
+                StringBuilder stringBuilder = getStringBuilder();
+
+                JsonObject objectPage = JsonParser.parseString(stringBuilder.toString()).getAsJsonObject();
+                JsonObject hashDataObject = objectPage.get("chapter").getAsJsonObject();
+                JsonArray arrayDataPage = objectPage.get("data").getAsJsonArray();
+                JsonArray arrayDataSaverPage = objectPage.get("dataSaver").getAsJsonArray();
+                List<String> dataList = new ArrayList<>();
+                List<String> dataSaverList = new ArrayList<>();
+
+                arrayDataPage.forEach(JsonElement -> {
+                    dataList.add(JsonElement.getAsString());
+                });
+
+                arrayDataSaverPage.forEach(JsonElement -> {
+                    dataSaverList.add(JsonElement.getAsString());
+                });
+
+                Page pageModel = new Page();
+
+                pageModel.setBaseUrl(objectPage.get("baseUrl").getAsString());
+                pageModel.setHash(hashDataObject.get("hash").getAsString());
+                pageModel.setDataList(dataList);
+                pageModel.setDataServerList(dataSaverList);
+
+                addMangaPage(pageModel);
+            }
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+        return getPageList();
+    }
+
+
     private List<String> languageManga(JsonObject mangaAttributes) {
         JsonArray languages = mangaAttributes.getAsJsonArray("availableTranslatedLanguages");
         List<String> languagesList = new ArrayList<>();
@@ -188,50 +228,4 @@ public abstract class MangaManager extends ApiStorage {
         return totalChapters;
     }
 
-    List<Page> gettingPages(String chapterID) {
-
-        this.urlBuilt = BASE_URL_MANGA.concat(chapterID);
-
-        try {
-            int code = urlConnection(urlBuilt).getResponseCode();
-
-            if (code == HttpsURLConnection.HTTP_OK) {
-                StringBuilder stringBuilder = getStringBuilder();
-
-                JsonObject objectPage = JsonParser.parseString(stringBuilder.toString()).getAsJsonObject();
-                JsonObject hashDataObject = objectPage.get("chapter").getAsJsonObject();
-                JsonArray arrayDataPage = objectPage.get("data").getAsJsonArray();
-                JsonArray arrayDataSaverPage = objectPage.get("dataSaver").getAsJsonArray();
-                List<String> dataList = new ArrayList<>();
-                List<String> dataSaverList = new ArrayList<>();
-                arrayDataPage.forEach(JsonElement -> {
-
-                    dataList.add(JsonElement.getAsString());
-
-                });
-
-                arrayDataSaverPage.forEach(JsonElement -> {
-
-                    dataSaverList.add(JsonElement.getAsString());
-
-                });
-
-                Page pageModel = new Page();
-
-                pageModel.setBaseUrl(objectPage.get("baseUrl").getAsString());
-                pageModel.setHash(hashDataObject.get("hash").getAsString());
-                pageModel.setDataList(dataList);
-                pageModel.setDataServerList(dataSaverList);
-
-                addMangaPage(pageModel);
-
-
-            }
-        } catch (Exception exception) {
-
-            throw new RuntimeException(exception);
-        }
-
-        return getPageList();
-    }
 }
